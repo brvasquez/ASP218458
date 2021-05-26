@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\producto_compraController.cs" />
     <Compile Include="Controllers\proveedorsController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -297,6 +298,11 @@
     <Content Include="Views\Compras\Details.cshtml" />
     <Content Include="Views\Compras\Edit.cshtml" />
     <Content Include="Views\Compras\Index.cshtml" />
+    <Content Include="Views\producto_compra\Create.cshtml" />
+    <Content Include="Views\producto_compra\Delete.cshtml" />
+    <Content Include="Views\producto_compra\Details.cshtml" />
+    <Content Include="Views\producto_compra\Edit.cshtml" />
+    <Content Include="Views\producto_compra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

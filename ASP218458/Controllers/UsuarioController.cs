@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 //importando los modelos de base de datos
 using ASP218458.Models;
 
@@ -12,6 +13,7 @@ namespace ASP218458.Controllers
     public class UsuarioController : Controller
     {
         // GET: Usuario
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new inventarioEntities())
@@ -77,11 +79,13 @@ namespace ASP218458.Controllers
         {
             try
             {
-                using (var db = new inventarioEntities()) {
+                using (var db = new inventarioEntities())
+                {
                     usuario findUser = db.usuario.Where(a => a.id == id).FirstOrDefault();
                     return View(findUser);
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "error " + ex);
                 return View();
@@ -107,7 +111,8 @@ namespace ASP218458.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "error " + ex);
                 return View();
@@ -125,11 +130,51 @@ namespace ASP218458.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "error " + ex);
                 return View();
             }
+        }
+
+        public ActionResult nuevoIndex()
+        {
+            return View();
+        }
+
+        public ActionResult Login(string message = "")
+        {
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string user, string password)
+        {
+            string passEncrip = UsuarioController.HashSHA1(password);
+            using (var db = new inventarioEntities())
+            {
+                var userLogin = db.usuario.FirstOrDefault(e => e.email == user && e.password == passEncrip);
+                if (userLogin != null)
+                {
+                    FormsAuthentication.SetAuthCookie(userLogin.email, true);
+                    Session["User"] = userLogin;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Login("Verifique sus datos");
+                }
+            }
+        }
+
+        [Authorize]
+        public ActionResult CloseSession()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
     }

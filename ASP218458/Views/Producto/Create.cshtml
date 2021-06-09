@@ -48,7 +48,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="id_proveedor">Cod proveedor: </label>
+        <label class="control-label col-md-2" for="id_proveedor">Nombre proveedor: </label>
         <div class="col-md-10">
             @Html.DropDownList("id_proveedor", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.id_proveedor, "", new { @class = "text-danger" })

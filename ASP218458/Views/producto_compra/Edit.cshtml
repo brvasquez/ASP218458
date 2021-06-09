@@ -18,7 +18,7 @@
         @Html.HiddenFor(model => model.id)
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="id_compra">id compra: </label>
+        <label class="control-label col-md-2" for="id_compra">Cod Compra: </label>
         <div class="col-md-10">
             @Html.DropDownList("id_compra", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.id_compra, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="id_producto">id_producto: </label>
+        <label class="control-label col-md-2" for="id_producto">Cod Producto: </label>
         <div class="col-md-10">
             @Html.DropDownList("id_producto", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.id_producto, "", new { @class = "text-danger" })

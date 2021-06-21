@@ -36,9 +36,9 @@
                 @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "linkDelete" })
+                <a class="btn btn-" href="/proveedors/Edit/@item.id">Edit <span class="glyphicon glyphicon-edit"></span></a>
+                <a class="btn btn-" href="/proveedors/Details/@item.id">Details <span class="glyphicon glyphicon-eye-open"></span></a>
+                <a class="btn btn-" href="/proveedors/Delete/@item.id">Delete <span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
     }

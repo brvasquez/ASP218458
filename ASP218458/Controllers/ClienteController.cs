@@ -6,11 +6,15 @@ using System.Web;
 using System.Web.Mvc;
 //importando los modelos de base de datos
 using ASP218458.Models;
+using System.IO;
+
 
 namespace ASP218458.Controllers
 {
     public class clienteController : Controller
     {
+        private object tabcliente;
+
         // GET: Usuario
         public ActionResult Index()
         {
@@ -123,5 +127,69 @@ namespace ASP218458.Controllers
             }
         }
 
+        public ActionResult uploadCSV()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+
+        public ActionResult uploadCSV(HttpPostedFileBase fileform)
+        {
+
+            string filePath = string.Empty;
+
+            if (fileform != null)
+            {
+                //ruta de la carpeta que caragara el archivo
+                string path = Server.MapPath("~/Uploads/");
+
+                //verificar si la ruta de la carpeta existe
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                //obtener el nombre del archivo
+                filePath = path + Path.GetFileName(fileform.FileName);
+                //obtener la extension del archivo
+                string extension = Path.GetExtension(fileform.FileName);
+
+                //guardando el archivo
+                fileform.SaveAs(filePath);
+
+                string csvData = System.IO.File.ReadAllText(filePath);
+                foreach (string row in csvData.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var newCliente = new cliente
+                        {
+                            nombre = row.Split(';')[0],
+                            documento = row.Split(';')[1],
+                            email = row.Split(';')[2],
+
+                        };
+
+                        using (var db = new inventarioEntities())
+                        {
+                            db.cliente.Add(newCliente);
+
+                            db.SaveChanges();
+
+                        }
+
+
+                    }
+                }
+
+            }
+            return View();
+
+
+        }
+
+      
     }
 }

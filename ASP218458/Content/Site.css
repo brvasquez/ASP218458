@@ -30,7 +30,9 @@ html, body {
 }
 
 body {
-    background: #EDEDF0;
+    background: #0B0B0C;
+    color: #fff;
+    font-family: 'Shadows Into Light', cursive;
 }
 
 #circle {
@@ -56,3 +58,5 @@ body {
         transform: rotate(360deg);
     }
 }
+
+

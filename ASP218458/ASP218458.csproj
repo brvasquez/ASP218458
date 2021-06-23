@@ -220,6 +220,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reporte.cs" />
+    <Compile Include="Models\ReporteP.cs" />
     <Compile Include="Models\usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -316,6 +317,7 @@
     <Content Include="Views\Producto\Reporte.cshtml" />
     <Content Include="Views\proveedors\uploadCSV.cshtml" />
     <Content Include="Views\Cliente\uploadCSV.cshtml" />
+    <Content Include="Views\Cliente\ReporteP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

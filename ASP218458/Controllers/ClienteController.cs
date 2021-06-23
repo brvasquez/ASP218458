@@ -7,7 +7,7 @@ using System.Web.Mvc;
 //importando los modelos de base de datos
 using ASP218458.Models;
 using System.IO;
-
+using Rotativa;
 
 namespace ASP218458.Controllers
 {
@@ -190,6 +190,27 @@ namespace ASP218458.Controllers
 
         }
 
-      
+        public ActionResult ReporteP()
+        {
+            var db = new inventarioEntities();
+            var query = from tabCompras in db.compra
+                        join tabCliente in db.cliente on tabCompras.id equals tabCliente.id
+                        select new ReporteP
+                        {
+                            fechaCompras = tabCompras.fecha,
+                            totalCompras = tabCompras.total,
+                            nombreCliente = tabCliente.nombre,
+                            documentoCliente = tabCliente.documento,
+                        };
+
+            return View(query);
+        }
+
+        public ActionResult ImprimirReporte1()
+        {
+            return new ActionAsPdf("ReporteP") { FileName = "ReporteP.pdf" };
+        }
+
+
     }
 }

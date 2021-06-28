@@ -1,0 +1,36 @@
+﻿@model ASP218458.Models.UsuarioIndex
+@{
+    ViewBag.Title = "PaginadorIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <center><h2>PAGINADOR</h2></center>
+    </div>
+    <div class="card-body">
+        <table class="display responsive nowrap" id="myTable" style="width:100%">
+
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+            </tr>
+
+            @foreach (var usuario in Model.Usuarios)
+            {
+                <tr>
+                    <td>@usuario.nombre</td>
+                    <td>@usuario.apellido</td>
+                    <td>@usuario.email</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+<a class="btn btn-info" href="/Usuario/Index">Volver a la lista <span class="glyphicon glyphicon-hand-left"></span></a>
+
+@{ Html.RenderPartial("Paginador", Model);}
